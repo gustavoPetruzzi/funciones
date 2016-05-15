@@ -36,12 +36,18 @@ int initArray(void* pArray, int length, int tipo)
     return retorno;
 }
 
-char mostrarMenu( char* textomenu, char min, char max )
+int mostrarMenu(char*input,char* textomenu, char min, char max )
 {
-    char opcion;
-    if()
-    opcion =getChar(&opcion, textomenu, "ERROR: ", )
-    return opcion;
+    int auxInt;
+    auxInt =getChar(input, textomenu, "caracter no valido: ",'!', '}');
+    if(input!= NULL && strlen(textomenu)> 0)
+    {
+        if(*input<= min && *input>= max)
+        {
+            auxInt = -1;
+        }
+    }
+    return auxInt;
 }
 
 int mostrarArray(void* pArray, int largo, int tipo)
