@@ -13,36 +13,38 @@
 * \return Si obtuvo el numero [0] si no [-1]
 *
 */
-int getInt(int* input,char message[],char eMessage[], int lowLimit, int hiLimit)
+int getInt(int* input,char* message,char* eMessage, int lowLimit, int hiLimit)
 {
     int auxInt;
     int flag = -1;
     int resp;
-    printf("%s", message);
-    fflush(stdin);          // Se pone bandera por si nos olvidamos un return
-    resp = scanf("%d", &auxInt);
-    if(resp == 1)
+    if(message != NULL && eMessage != NULL && strlen(message) > 0 && strlen(eMessage) > 0 && input> 0)
     {
-        if(auxInt > lowLimit && auxInt < hiLimit)
+        printf("%s", message);
+        fflush(stdin);          // Se pone bandera por si nos olvidamos un return
+        resp = scanf("%d", &auxInt);
+        if(resp == 1)
         {
-            *input = auxInt;
-            flag = 0;
+            if(auxInt > lowLimit && auxInt < hiLimit)
+            {
+                *input = auxInt;
+                flag = 0;
 
+            }
         }
-    }
 
-    if(flag == -1)
+        if(flag == -1)
+        {
+            printf("%s", eMessage);
+        }
+
+
+    }
+    else
     {
-        printf("%s", eMessage);
+        printf("No entro");
     }
-
     return flag;
-
-
-
-
-
-
 
 }
 
@@ -56,34 +58,37 @@ int getInt(int* input,char message[],char eMessage[], int lowLimit, int hiLimit)
 * \return Si obtuvo el numero [0] si no [-1]
 *
 */
-int getFloat(float* input,char message[],char eMessage[], float lowLimit, float hiLimit)
+int getFloat(float* input,char* message,char* eMessage, float lowLimit, float hiLimit)
 {
     float auxFloat;
     int resp;
-    printf("%s", message);
-    fflush(stdin);
-    resp = scanf("%f", &auxFloat);
-    if(resp == 1)
+    if(message != NULL && eMessage != NULL && strlen(message) > 0 && strlen(eMessage) > 0 && input> 0)
     {
-        if(auxFloat > lowLimit && auxFloat < hiLimit)
+        printf("%s", message);
+        fflush(stdin);
+        resp = scanf("%f", &auxFloat);
+        if(resp == 1)
         {
-            *input = auxFloat;
-            return 0;
+            if(auxFloat > lowLimit && auxFloat < hiLimit)
+            {
+                *input = auxFloat;
+                return 0;
 
+            }
+            /*else
+            {
+                printf("%s", eMessage);
+                return -1;
+            }*/
         }
-        /*else
-        {
-            printf("%s", eMessage);
-            return -1;
-        }*/
+        printf("%s", eMessage);
+
     }
-
-
-    printf("%s", eMessage);
+    else
+    {
+        printf("No entro");
+    }
     return -1;
-
-
-
 }
 
 
@@ -101,26 +106,28 @@ int getChar(char* input,char message[],char eMessage[], char lowLimit, char hiLi
 {
     char auxChar[5];
     int resp;
-    printf("%s", message);
-    fflush(stdin);
-    resp = scanf("%s", auxChar);
-    if(resp == 1 && (auxChar[1] == '\0'))
+    if(message != NULL && eMessage != NULL && strlen(message) > 0 && strlen(eMessage) > 0 && input> 0)
     {
-        if(auxChar[0] >= lowLimit && auxChar[0] <= hiLimit)
+        printf("%s", message);
+        fflush(stdin);
+        resp = scanf("%s", auxChar);
+        if(resp == 1 && (auxChar[1] == '\0'))
         {
-            *input = auxChar[0];
-            return 0;
+            if(auxChar[0] >= lowLimit && auxChar[0] <= hiLimit)
+            {
+                *input = auxChar[0];
+                return 0;
 
-        }
-        else
-        {
-            printf("%s", eMessage);
-            return -1;
+            }
+            else
+            {
+                printf("%s", eMessage);
+            }
         }
     }
 
 
-    printf("%s", eMessage);
+
     return -1;
 }
 
@@ -135,22 +142,26 @@ int getChar(char* input,char message[],char eMessage[], char lowLimit, char hiLi
 * \return Si obtuvo la cadena [0] si no [-1]
 *
 */
-int getString(char* input,char message[],char eMessage[], int lowLimit, int hiLimit)
+int getString(char* input,char* message,char* eMessage, int lowLimit, int hiLimit)
 {
     char auxChar[50];
     int resp;
-    printf("%s", message);
-    fflush(stdin);
-    resp = scanf("%s", auxChar);
-    if(resp == 1 && (strlen(auxChar)>lowLimit && strlen(auxChar) < hiLimit ) )
+    if(message != NULL && eMessage != NULL && strlen(message) > 0 && strlen(eMessage) > 0 && input> 0)
     {
+        printf("%s", message);
+        fflush(stdin);
+        resp = scanf("%s", auxChar);
+        if(resp == 1 && (strlen(auxChar)>lowLimit && strlen(auxChar) < hiLimit ) )
+        {
 
-            strcpy(input, auxChar);
-            return 0;
+                strcpy(input, auxChar);
+                return 0;
 
 
+        }
+        printf("%s", eMessage);
     }
-    printf("%s", eMessage);
+
     return -1;
 }
 
@@ -164,40 +175,41 @@ int getString(char* input,char message[],char eMessage[], int lowLimit, int hiLi
 * \return Si obtuvo la cadena [0] si no [-1]
 *
 */
-int getName(char* input,char message[],char eMessage[], int lowLimit, int hiLimit)
+int getName(char* input,char* message,char* eMessage, int lowLimit, int hiLimit)
 {
     char auxChar[50];
     int resp;
     int flagName = 1;
     int i;
-    printf("%s", message);
-    fflush(stdin);
-    resp = scanf("%s", auxChar);
-    if(resp == 1 && (strlen(auxChar)>lowLimit && strlen(auxChar) < hiLimit ) )
+    if(message != NULL && eMessage != NULL && strlen(message) > 0 && strlen(eMessage) > 0 && input> 0)
     {
-        for(i= 0; i< strlen(auxChar); i ++)
+        printf("%s", message);
+        fflush(stdin);
+        resp = scanf("%s", auxChar);
+        if(resp == 1 && (strlen(auxChar)>lowLimit && strlen(auxChar) < hiLimit ) )
         {
-            auxChar[i] = tolower(auxChar[i]);
-            if(auxChar[i] < 'a' || auxChar[i] >'z')
+            for(i= 0; i< strlen(auxChar); i ++)
             {
-                flagName = 0;
-                break;
+                auxChar[i] = tolower(auxChar[i]);
+                if(auxChar[i] < 'a' || auxChar[i] >'z')
+                {
+                    flagName = 0;
+                    break;
+                }
             }
         }
+        else
+        {
+            flagName = 0;
+        }
+        if(flagName)
+        {
+            auxChar[0] = toupper(auxChar[0]);
+            strcpy(input, auxChar);
+            return 0;
+        }
+        printf("%s", eMessage);
     }
-    else
-    {
-        flagName = 0;
-    }
-    if(flagName)
-    {
-        auxChar[0] = toupper(auxChar[0]);
-        strcpy(input, auxChar);
-        return 0;
-    }
-
-    system("cls");
-    printf("%s", eMessage);
     return -1;
 }
 
@@ -212,32 +224,35 @@ int getName(char* input,char message[],char eMessage[], int lowLimit, int hiLimi
 * \return Si obtuvo la cadena [0] si no [-1]
 *
 */
-int getEmail(char* input,char message[],char eMessage[], int lowLimit, int hiLimit)
+int getEmail(char* input,char* message,char* eMessage, int lowLimit, int hiLimit)
 {
     char auxChar[50];
     int resp;
     int i;
-    printf("%s", message);
-    fflush(stdin);
-    resp = scanf("%s", auxChar);
-    if(resp == 1 && (strlen(auxChar)>lowLimit && strlen(auxChar) < hiLimit ) )
+    if(message != NULL && eMessage != NULL && strlen(message) > 0 && strlen(eMessage) > 0 && input> 0)
     {
-        for(i = 0; i<strlen(auxChar); i++)
+        printf("%s", message);
+        fflush(stdin);
+        resp = scanf("%s", auxChar);
+        if(resp == 1 && (strlen(auxChar)>lowLimit && strlen(auxChar) < hiLimit ) )
         {
-            if(auxChar[i] == '@')
+            for(i = 0; i<strlen(auxChar); i++)
             {
-                strcpy(input, auxChar);
-                return 0;
+                if(auxChar[i] == '@')
+                {
+                    strcpy(input, auxChar);
+                    return 0;
+                }
             }
         }
+        printf("%s", eMessage);
     }
-    printf("%s", eMessage);
     return -1;
 }
 
 
 /**
-* \brief Solicita una cadena de caracteres que admite espacio al usuario y la valida
+* \brief Solicita una cadena de caracteres que admite espacio (hasta 50 caracteres) al usuario y la valida
 * \param input Se carga el string ingresado
 * \param message Es el mensaje a ser mostrado
 * \param eMessage Es el mensaje a ser mostrado en caso de error
@@ -251,7 +266,7 @@ int getStringSpace(char* input,char message[],char eMessage[], int lowLimit, int
     char auxChar[50];
     printf("%s", message);
     fflush(stdin);
-    gets(auxChar);
+    scanf("%50[^\n]%c",auxChar);
     if(strlen(auxChar)>lowLimit && strlen(auxChar) < hiLimit )
     {
         toupper(auxChar[0]);
