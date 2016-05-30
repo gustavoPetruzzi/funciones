@@ -100,7 +100,8 @@ int buscarLibre(int * pArray, int length)
     return indice;
 }
 
-int agregarPersonaArray(int * pArray, int length)
+void systemPause(void)
 {
-
+    printf("Press 'Enter' to continue: ... ");
+    while ( getchar() != '\n');
 }
